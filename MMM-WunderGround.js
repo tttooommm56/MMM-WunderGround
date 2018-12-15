@@ -258,14 +258,25 @@ Module.register("MMM-WunderGround", {
             sunriseSunsetTxt.innerHTML = this.sunriseSunsetTime;
             sunriseSunsetTxt.className = "vcen left";
             row_sitrep.appendChild(sunriseSunsetTxt);
+            
+            
 
+			var precipTodayIcon = document.createElement("td");
+            precipTodayIcon.className = "wi wi-umbrella";
+            row_sitrep.appendChild(precipTodayIcon);
+            
+			var precipTodayTxt = document.createElement("td");
+            precipTodayTxt.innerHTML = this.precipToday + "mm";
+            precipTodayTxt.className = "vcen left";
+            row_sitrep.appendChild(precipTodayTxt);
+            
             var moonPhaseIcon = document.createElement("td");
             moonPhaseIcon.innerHTML = this.moonPhaseIcon;
-            row_sitrep.appendChild(moonPhaseIcon);
+            row_sitrep.appendChild(moonPhaseIcon);           
 
             table_sitrep.appendChild(row_sitrep);
             small.appendChild(table_sitrep);
-
+            
             var large = document.createElement("div");
             large.className = "large light";
 
@@ -627,7 +638,7 @@ Module.register("MMM-WunderGround", {
                     row_icon.appendChild(iconCell);
 
                     maxTempCell = document.createElement("td");
-                    maxTempCell.innerHTML = forecast.maxTemp + "&deg;/" + forecast.minTemp + "&deg;";
+                    maxTempCell.innerHTML = forecast.minTemp + "&deg;/" + forecast.maxTemp + "&deg;";
                     maxTempCell.className = "hour";
                     row_temp.appendChild(maxTempCell);
 
@@ -739,7 +750,7 @@ Module.register("MMM-WunderGround", {
 					row_icon.appendChild(iconCell);
 
 					maxTempCell = document.createElement("td");
-					maxTempCell.innerHTML = forecast.maxTemp + "&deg;/" + forecast.minTemp + "&deg;";
+					maxTempCell.innerHTML = forecast.minTemp + "&deg;/" + forecast.maxTemp + "&deg;";
 					maxTempCell.className = "hour";
 					row_temp.appendChild(maxTempCell);
 
@@ -944,7 +955,7 @@ Module.register("MMM-WunderGround", {
             this.windSpeed = "wi-wind-beaufort-" + this.ms2Beaufort(data.current_observation.wind_kph);
             this.windSpeedMph = data.current_observation.wind_mph;
             this.moonPhaseIcon = "<img class='moonPhaseIcon' src='https://www.wunderground.com/graphics/moonpictsnew/moon" + data.moon_phase.ageOfMoon + ".gif'>";
-
+			this.precipToday = data.current_observation.precip_today_metric
 
             if (this.config.units == "metric") {
                 this.temperature = data.current_observation.temp_c;
